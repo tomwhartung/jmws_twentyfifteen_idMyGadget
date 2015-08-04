@@ -1,3 +1,8 @@
+#
+#  Documentation is here: http://git-scm.com/docs/gitignore
+#
+#  Standard entries added by github when I created the repo:
+#
 *.log
 .htaccess
 sitemap.xml
@@ -11,3 +16,9 @@ wp-content/cache/
 wp-content/upgrade/
 wp-content/uploads/
 wp-content/wp-cache-config.php
+#
+#  I switch between netbeans and vi, depending on how "serious" the work is
+#
+/nbproject/
+*.swp
+
