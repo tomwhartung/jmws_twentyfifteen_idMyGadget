@@ -57,5 +57,21 @@ get_header(); ?>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
+<div id="debug">
+	<p>$theme_object_stylesheet: <?php print $theme_object_stylesheet; ?></p>
+	<p>get_theme_mod('gadget_detector_select'):
+		<?php echo get_theme_mod('gadget_detector_select', 'detect_mobile_browsers') ?></p>
+	<p>get_theme_mod('gadget_detector_radio'):
+		<?php echo get_theme_mod('gadget_detector_radio', 'detect_mobile_browsers') ?></p>
+	<p>$jmwsIdMyGadget->getGadgetDetectorString():
+		<?php print $jmwsIdMyGadget->getGadgetDetectorString(); ?></p>
+	<p>$jmwsIdMyGadget->getGadgetString():
+		<?php print $jmwsIdMyGadget->getGadgetString(); ?></p>
+	<p>$gadgetDetectorIndex: <?php print $gadgetDetectorIndex; ?></p>
+	<p>$gadgetDetectorString: <?php print $gadgetDetectorString; ?></p>
+	<p>$idMyGadgetClass: <?php print $idMyGadgetClass; ?></p>
+	<p>home_url(): <?php print home_url(); ?></p>
+	<p>bloginfo('url'): <?php print bloginfo('url'); ?></p>
+</div>
 
 <?php get_footer(); ?>
