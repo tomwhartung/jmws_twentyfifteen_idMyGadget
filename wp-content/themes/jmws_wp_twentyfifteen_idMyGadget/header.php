@@ -19,6 +19,15 @@
 	<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
 	<![endif]-->
 	<?php wp_head(); ?>
+	<?php
+	//
+	// If the device detection object has NOT been created,
+	//   create an object that can keep the app from whitescreening with a null pointer etc. and
+	//   display an appropriate error message
+	//
+	global $jmwsIdMyGadget;
+	check_idMyGadget_install();
+	?>
 </head>
 
 <body <?php body_class(); ?>>
