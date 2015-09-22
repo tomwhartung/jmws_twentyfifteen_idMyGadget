@@ -35,6 +35,13 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 
 	<div id="sidebar" class="sidebar">
+		<?php
+			/* For development only, remove when code is stable:
+			 * Displaying these values can help us make sure we haven't inadvertently
+			 * broken something while we are actively working on this.
+			 */
+			print $jmwsIdMyGadget->getGadgetDetectorStringChar() . '/' . $jmwsIdMyGadget->getGadgetStringChar();
+		?>
 		<header id="masthead" class="site-header" role="banner">
 			<div class="site-branding">
 				<?php
