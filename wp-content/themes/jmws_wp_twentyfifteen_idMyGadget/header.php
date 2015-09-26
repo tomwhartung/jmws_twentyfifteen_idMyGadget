@@ -36,10 +36,10 @@
 
 	<div id="sidebar" class="sidebar">
 		<?php
-			/* For development only, remove when code is stable:
-			 * Displaying these values can help us make sure we haven't inadvertently
-			 * broken something while we are actively working on this.
-			 */
+			// For development only! remove when code is stable:
+			// Displaying these values can help us make sure we haven't inadvertently
+			// broken something while we are actively working on this.
+			//
 			print $jmwsIdMyGadget->getGadgetDetectorStringChar() . '/' . $jmwsIdMyGadget->getGadgetStringChar();
 		?>
 		<header id="masthead" class="site-header" role="banner">
@@ -64,3 +64,9 @@
 	</div><!-- .sidebar -->
 
 	<div id="content" class="site-content">
+		<?php
+			if (isset($jmwsIdMyGadget->errorMessage) )
+			{
+				echo $jmwsIdMyGadget->errorMessage;
+			}
+		?>
