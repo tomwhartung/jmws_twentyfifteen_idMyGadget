@@ -21,12 +21,47 @@
 	<?php wp_head(); ?>
 	<?php
 	//
-	// If the device detection object has NOT been created,
-	//   create an object that can keep the app from whitescreening with a null pointer etc. and
-	//   display an appropriate error message
+	// check_idMyGadget_install:
+	//   If the device detection object has NOT been created,
+	//     Create an object that can keep the app from whitescreening with a null pointer etc. and
+	//     Display an appropriate error message (markup for that is at the end of this file)
+	// If we do have the object,
+	//   Call its fcn to get the html we need for the header
 	//
 	global $jmwsIdMyGadget;
 	check_idMyGadget_install();
+	$site_name = get_bloginfo('name' );
+	$header_html = '';
+	$header_html .= '<header id="masthead" class="site-header" role="banner">';
+	$header_html .= '<div class="site-branding">';
+
+//	if ( $jmwsIdMyGadget->isInstalled() )
+	if ( FALSE )
+	{
+		$header_html .= $jmwsIdMyGadget->getHeaderHtml( $header_html );
+	}
+	else
+	{
+		// The idMyGadget module is not available so we use this,
+		// which is the original twentyfifteen code (as of Sept. 2015).
+		//
+		if ( is_front_page() && is_home() )
+		{
+			$header_html .= '<h1 class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
+		}
+		else
+		{
+			$header_html .= '<p class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
+		}
+		$description = get_bloginfo( 'description', 'display' );
+		if ( $description || is_customize_preview() )
+		{
+			$header_html .= '<p class="site-description">' . $description . '</p>';
+		}
+		$header_html .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
+	}
+	$header_html .= '</div><!-- .site-branding -->';
+	$header_html .= '</header><!-- .site-header -->';
 	?>
 </head>
 
@@ -42,24 +77,7 @@
 			//
 			print $jmwsIdMyGadget->getGadgetDetectorStringChar() . '/' . $jmwsIdMyGadget->getGadgetStringChar();
 		?>
-		<header id="masthead" class="site-header" role="banner">
-			<div class="site-branding">
-				<?php
-					if ( is_front_page() && is_home() ) : ?>
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php else : ?>
-						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-					<?php endif;
-
-					$description = get_bloginfo( 'description', 'display' );
-					if ( $description || is_customize_preview() ) : ?>
-						<p class="site-description"><?php echo $description; ?></p>
-					<?php endif;
-				?>
-				<button class="secondary-toggle"><?php _e( 'Menu and widgets', 'twentyfifteen' ); ?></button>
-			</div><!-- .site-branding -->
-		</header><!-- .site-header -->
-
+		<?php echo $header_html ?>
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
 
