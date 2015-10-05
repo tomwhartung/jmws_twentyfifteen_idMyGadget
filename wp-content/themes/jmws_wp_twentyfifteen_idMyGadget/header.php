@@ -58,7 +58,8 @@
 		{
 			$header_html .= '<p class="site-description">' . $description . '</p>';
 		}
-		$header_html .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
+		// $header_html .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
+		$header_html .= '<button class="secondary-toggle">Menu and widgets</button>';
 	}
 	$header_html .= '</div><!-- .site-branding -->';
 	$header_html .= '</header><!-- .site-header -->';
