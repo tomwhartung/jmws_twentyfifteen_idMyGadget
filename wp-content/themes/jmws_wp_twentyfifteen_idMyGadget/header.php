@@ -31,14 +31,12 @@
 	global $jmwsIdMyGadget;
 	check_idMyGadget_install();
 	$site_name = get_bloginfo('name' );
-	$header_html = '';
-	$header_html .= '<header id="masthead" class="site-header" role="banner">';
-	$header_html .= '<div class="site-branding">';
+	$logoTitleDescription = '';
 
-//	if ( $jmwsIdMyGadget->isInstalled() )
-	if ( FALSE )
+//	if ( FALSE )
+	if ( $jmwsIdMyGadget->isInstalled() )
 	{
-		$header_html .= $jmwsIdMyGadget->getHeaderHtml( $header_html );
+		$logoTitleDescription = $jmwsIdMyGadget->getLogoTitleDescriptionHtml();
 	}
 	else
 	{
@@ -47,20 +45,24 @@
 		//
 		if ( is_front_page() && is_home() )
 		{
-			$header_html .= '<h1 class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
+			$logoTitleDescription = '<h1 class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
 		}
 		else
 		{
-			$header_html .= '<p class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
+			$logoTitleDescription .= '<p class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
 		}
 		$description = get_bloginfo( 'description', 'display' );
 		if ( $description || is_customize_preview() )
 		{
-			$header_html .= '<p class="site-description">' . $description . '</p>';
+			$logoTitleDescription .= '<p class="site-description">' . $description . '</p>';
 		}
-		// $header_html .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
-		$header_html .= '<button class="secondary-toggle">Menu and widgets</button>';
+		// $logoTitleDescription .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
+		$logoTitleDescription .= '<button class="secondary-toggle">Menu and widgets</button>';
 	}
+	$header_html = '';
+	$header_html .= '<header id="masthead" class="site-header" role="banner">';
+	$header_html .= '<div class="site-branding yes">';
+	$header_html .= $logoTitleDescription;
 	$header_html .= '</div><!-- .site-branding -->';
 	$header_html .= '</header><!-- .site-header -->';
 	?>
