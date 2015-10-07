@@ -61,7 +61,7 @@
 	}
 	$header_html = '';
 	$header_html .= '<header id="masthead" class="site-header" role="banner">';
-	$header_html .= '<div class="site-branding yes">';
+	$header_html .= '<div class="site-branding">';
 	$header_html .= $logoTitleDescription;
 	$header_html .= '</div><!-- .site-branding -->';
 	$header_html .= '</header><!-- .site-header -->';
