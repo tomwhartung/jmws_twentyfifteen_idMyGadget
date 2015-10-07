@@ -62,7 +62,7 @@ get_header(); ?>
 	<p><?php print ''; ?></p>
 	<p>$jmwsIdMyGadget->getGadgetDetectorString(): <?php print $jmwsIdMyGadget->getGadgetDetectorString(); ?></p>
 	<p><?php print ''; ?></p>
-	<p>$jmwsIdMyGadget->detectionEnabled: <?php print $jmwsIdMyGadget->detectionEnabled; ?></p>
+	<p>$jmwsIdMyGadget->isEnabled(): <?php print $jmwsIdMyGadget->isEnabled(); ?></p>
 	<p><?php print ''; ?></p>
 	<p><?php print ''; ?></p>
 	<p><?php print ''; ?></p>

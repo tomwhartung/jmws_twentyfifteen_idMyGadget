@@ -34,22 +34,24 @@
 	$logoTitleDescription = '';
 
 //	if ( FALSE )
-	if ( $jmwsIdMyGadget->isInstalled() )
+	if ( $jmwsIdMyGadget->isInstalled() && $jmwsIdMyGadget->isEnabled() )
 	{
 		$logoTitleDescription = $jmwsIdMyGadget->getLogoTitleDescriptionHtml();
 	}
 	else
 	{
-		// The idMyGadget module is not available so we use this,
+		// Device detection is not available so we use this,
 		// which is the original twentyfifteen code (as of Sept. 2015).
 		//
 		if ( is_front_page() && is_home() )
 		{
-			$logoTitleDescription = '<h1 class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
+			$logoTitleDescription = '<h1 class="site-title">' .
+				'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
 		}
 		else
 		{
-			$logoTitleDescription .= '<p class="site-title"><a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
+			$logoTitleDescription = '<p class="site-title">' .
+				'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
 		}
 		$description = get_bloginfo( 'description', 'display' );
 		if ( $description || is_customize_preview() )
