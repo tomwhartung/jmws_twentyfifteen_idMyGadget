@@ -18,57 +18,58 @@
 	<!--[if lt IE 9]>
 	<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
 	<![endif]-->
+	<title>twentyfifteen:</title>
 	<?php wp_head(); ?>
-	<?php
-	//
-	// check_idMyGadget_install:
-	//   If the device detection object has NOT been created,
-	//     Create an object that can keep the app from whitescreening with a null pointer etc. and
-	//     Display an appropriate error message (markup for that is at the end of this file)
-	// If we do have the object,
-	//   Call its fcn to get the html we need for the header
-	//
-	global $jmwsIdMyGadget;
-	check_idMyGadget_install();
-	$site_name = get_bloginfo('name' );
-	$logoTitleDescription = '';
+</head>
+<?php
+//
+// check_idMyGadget_install:
+//   If the device detection object has NOT been created,
+//     Create an object that can keep the app from whitescreening with a null pointer etc. and
+//     Display an appropriate error message (markup for that is at the end of this file)
+// If we do have the object,
+//   Call its fcn to get the html we need for the header
+//
+global $jmwsIdMyGadget;
+check_idMyGadget_install();
+$site_name = get_bloginfo('name' );
+$logoTitleDescription = '';
 
 //	if ( FALSE )
-	if ( $jmwsIdMyGadget->isInstalled() && $jmwsIdMyGadget->isEnabled() )
-	{
-		$logoTitleDescription = $jmwsIdMyGadget->getLogoTitleDescriptionHtml();
-	}
-	else
-	{
-		// Device detection is not available so we use this,
-		// which is the original twentyfifteen code (as of Sept. 2015).
-		//
-		if ( is_front_page() && is_home() )
-		{
-			$logoTitleDescription = '<h1 class="site-title">' .
-				'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
-		}
-		else
-		{
-			$logoTitleDescription = '<p class="site-title">' .
-				'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
-		}
-		$description = get_bloginfo( 'description', 'display' );
-		if ( $description || is_customize_preview() )
-		{
-			$logoTitleDescription .= '<p class="site-description">' . $description . '</p>';
-		}
-		// $logoTitleDescription .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
-		$logoTitleDescription .= '<button class="secondary-toggle">Menu and widgets</button>';
-	}
-	$header_html = '';
-	$header_html .= '<header id="masthead" class="site-header" role="banner">';
-	$header_html .= '<div class="site-branding">';
-	$header_html .= $logoTitleDescription;
-	$header_html .= '</div><!-- .site-branding -->';
-	$header_html .= '</header><!-- .site-header -->';
-	?>
-</head>
+if ( $jmwsIdMyGadget->isInstalled() && $jmwsIdMyGadget->isEnabled() )
+{
+  $logoTitleDescription = $jmwsIdMyGadget->getLogoTitleDescriptionHtml();
+}
+else
+{
+  // Device detection is not available so we use this,
+  // which is the original twentyfifteen code (as of Sept. 2015).
+  //
+  if ( is_front_page() && is_home() )
+  {
+    $logoTitleDescription = '<h1 class="site-title">' .
+      '<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
+  }
+  else
+  {
+    $logoTitleDescription = '<p class="site-title">' .
+      '<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
+  }
+  $description = get_bloginfo( 'description', 'display' );
+  if ( $description || is_customize_preview() )
+  {
+    $logoTitleDescription .= '<p class="site-description">' . $description . '</p>';
+  }
+  // $logoTitleDescription .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
+  $logoTitleDescription .= '<button class="secondary-toggle">Menu and widgets</button>';
+}
+$header_html = '';
+$header_html .= '<header id="masthead" class="site-header" role="banner">';
+$header_html .= '<div class="site-branding">';
+$header_html .= $logoTitleDescription;
+$header_html .= '</div><!-- .site-branding -->';
+$header_html .= '</header><!-- .site-header -->';
+?>
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
