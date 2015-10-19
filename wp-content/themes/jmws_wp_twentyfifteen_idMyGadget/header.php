@@ -87,6 +87,12 @@ $header_html .= '</header><!-- .site-header -->';
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
 
+	<div>
+		<p></p>
+		<p>jmwsIdMyGadget->usingJQueryMobile: <?php echo $jmwsIdMyGadget->usingJQueryMobile ?></p>
+		<p></p>
+	</div><!-- .debug -->
+
 	<div id="content" class="site-content">
 		<?php
 			if (isset($jmwsIdMyGadget->errorMessage) )
