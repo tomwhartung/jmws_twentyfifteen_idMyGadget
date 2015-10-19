@@ -76,22 +76,12 @@ $header_html .= '</header><!-- .site-header -->';
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 
 	<div id="sidebar" class="sidebar">
-		<?php
-			// For development only! remove when code is stable:
-			// Displaying these values can help us make sure we haven't inadvertently
-			// broken something while we are actively working on this.
-			//
-			print $jmwsIdMyGadget->getGadgetDetectorStringChar() . '/' . $jmwsIdMyGadget->getGadgetStringChar();
-		?>
+		<div class="debug">
+			<?php print $jmwsIdMyGadget->getSanityCheckString(); ?>
+		</div><!-- .debug -->
 		<?php echo $header_html ?>
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
-
-	<div>
-		<p></p>
-		<p>jmwsIdMyGadget->usingJQueryMobile: <?php echo $jmwsIdMyGadget->usingJQueryMobile ?></p>
-		<p></p>
-	</div><!-- .debug -->
 
 	<div id="content" class="site-content">
 		<?php
