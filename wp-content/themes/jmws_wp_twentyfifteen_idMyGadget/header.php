@@ -85,7 +85,7 @@ $header_html .= '</header><!-- .site-header -->';
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
 
-	<div id="content" class="site-content">
+	<div id="content" class="site-content" <?php echo $jmwsIdMyGadget->jqmDataRole['content'] ?>>
 		<?php
 			if (isset($jmwsIdMyGadget->errorMessage) )
 			{

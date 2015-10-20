@@ -8,11 +8,12 @@
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
  */
+global $jmwsIdMyGadget;
 ?>
 
 	</div><!-- .site-content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer" role="contentinfo" <?php echo $jmwsIdMyGadget->jqmDataRole['footer'] ?>>
 		<div class="site-info">
 			<?php
 				/**
