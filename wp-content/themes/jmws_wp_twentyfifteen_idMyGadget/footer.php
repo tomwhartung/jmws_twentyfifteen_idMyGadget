@@ -13,7 +13,8 @@ global $jmwsIdMyGadget;
 
 	</div><!-- .site-content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo" <?php echo $jmwsIdMyGadget->jqmDataRole['footer'] ?>>
+	<footer id="colophon" class="site-footer" role="contentinfo"
+		<?php echo $jmwsIdMyGadget->jqmDataRole['footer'] . ' ' . $jmwsIdMyGadget->jqmDataThemeAttribute ?>>
 		<div class="site-info">
 			<?php
 				/**
