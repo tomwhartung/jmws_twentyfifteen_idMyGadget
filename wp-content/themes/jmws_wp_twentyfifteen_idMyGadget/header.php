@@ -77,18 +77,19 @@ $header_html .= '</header><!-- .site-header -->';
 <div id="page" class="hfeed site" <?php echo $jmwsIdMyGadget->jqmDataRole['page'] ?>>
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 
-	<?php if( has_nav_menu('phone-header-nav') && $jmwsIdMyGadget->phoneHeaderNavThisDevice ) : ?>
-		<nav data-role="navbar">
-			<?php
-				wp_nav_menu( array(
-					'theme_location' => 'phone-header-nav',
-					'container' => false, // 'div' container will not be added
-				) );
-			?>
-		</nav>
-	<?php endif; ?>
-
 	<div id="sidebar" class="sidebar">
+
+		<?php if( has_nav_menu('phone-header-nav') && $jmwsIdMyGadget->phoneHeaderNavThisDevice ) : ?>
+			<nav data-role="navbar">
+				<?php
+					wp_nav_menu( array(
+						'theme_location' => 'phone-header-nav',
+						'container' => false, // 'div' container will not be added
+					) );
+				?>
+			</nav>
+		<?php endif; ?>
+
 		<?php echo $header_html ?>
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
