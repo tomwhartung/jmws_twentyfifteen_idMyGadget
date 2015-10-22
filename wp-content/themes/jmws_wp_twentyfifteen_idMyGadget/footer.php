@@ -32,5 +32,15 @@ global $jmwsIdMyGadget;
 
 <?php wp_footer(); ?>
 
+<?php if( has_nav_menu('phone-footer-nav') && $jmwsIdMyGadget->phoneFooterNavThisDevice ) : ?>
+	<nav>
+		<?php
+			wp_nav_menu( array(
+				'theme_location' => 'phone-footer-nav',
+			) );
+		?>
+	</nav>
+<?php endif; ?>
+
 </body>
 </html>

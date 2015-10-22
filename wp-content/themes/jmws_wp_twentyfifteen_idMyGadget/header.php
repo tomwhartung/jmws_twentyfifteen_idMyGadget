@@ -82,6 +82,7 @@ $header_html .= '</header><!-- .site-header -->';
 			<?php
 				wp_nav_menu( array(
 					'theme_location' => 'phone-header-nav',
+					'container' => false, // 'div' container will not be added
 				) );
 			?>
 		</nav>
