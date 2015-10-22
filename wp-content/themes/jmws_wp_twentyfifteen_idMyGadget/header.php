@@ -77,6 +77,16 @@ $header_html .= '</header><!-- .site-header -->';
 <div id="page" class="hfeed site" <?php echo $jmwsIdMyGadget->jqmDataRole['page'] ?>>
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 
+	<?php if( has_nav_menu('phone-header-nav') && $jmwsIdMyGadget->phoneHeaderNavThisDevice ) : ?>
+		<nav>
+			<?php
+				wp_nav_menu( array(
+					'theme_location' => 'phone-header-nav',
+				) );
+			?>
+		</nav>
+	<?php endif; ?>
+
 	<div id="sidebar" class="sidebar">
 		<div class="debug">
 			<?php print $jmwsIdMyGadget->getSanityCheckString(); ?>
