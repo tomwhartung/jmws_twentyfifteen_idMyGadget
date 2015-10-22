@@ -22,8 +22,19 @@ This theme uses IdMyGadget to enable specifying a different image for phones, ta
 
 Rather than remove this option and the functionality that goes with it, I decided to leave it in for when device detection is not working.
 
-1. 
+1. About the extra phone header/footer nav options
 
+First off, the phone nav only looks good on phones.
+Hence the name: *Phone* Header/Footer Nav.
+I designed the options so that you can see them on tablets and desktops and judge for yourself.
+Who am I to predict the use cases you will want to satisfy?
+
+Secondly, they look extra crappy when using this theme, due to the responsiveness.
+So again, I added some extra options so you could see for yourself.
+And again, how can I predict your use cases?
+Maybe with some twiddling and tinkering of the css etc. you can make these satisfy your needs.
+
+But the bottom line is, for best results, use the Phone Nav only on phones.
 
 ## Specific Changes Made
 
@@ -36,4 +47,6 @@ Rather than remove this option and the functionality that goes with it, I decide
 * Changed doctype to html
 
 * Added theme name to title (TODO: REMOVE THIS, and uncomment "add_theme_support( 'title-tag' );" // line 73 in functions.php)
+
+(Oops I did not do a great job of keeping track of this ....)
 
