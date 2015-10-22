@@ -78,7 +78,7 @@ $header_html .= '</header><!-- .site-header -->';
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 
 	<?php if( has_nav_menu('phone-header-nav') && $jmwsIdMyGadget->phoneHeaderNavThisDevice ) : ?>
-		<nav>
+		<nav data-role="navbar">
 			<?php
 				wp_nav_menu( array(
 					'theme_location' => 'phone-header-nav',
