@@ -89,9 +89,6 @@ $header_html .= '</header><!-- .site-header -->';
 	<?php endif; ?>
 
 	<div id="sidebar" class="sidebar">
-		<div class="debug">
-			<?php print $jmwsIdMyGadget->getSanityCheckString(); ?>
-		</div><!-- .debug -->
 		<?php echo $header_html ?>
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
