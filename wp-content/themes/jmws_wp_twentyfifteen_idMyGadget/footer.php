@@ -28,22 +28,20 @@ global $jmwsIdMyGadget;
 		</div><!-- .site-info -->
 		<div class="debug">
 			<?php print $jmwsIdMyGadget->getSanityCheckString(); ?>
+			<p>$jmwsIdMyGadget->phoneFooterNavIn2015Page: <?php echo $jmwsIdMyGadget->phoneFooterNavIn2015Page ?></p>
+			<p>$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar: <?php echo $jmwsIdMyGadget->phoneFooterNavIn2015Sidebar ?></p>
 		</div><!-- .debug -->
 	</footer><!-- .site-footer -->
+
+<?php if( $jmwsIdMyGadget->phoneFooterNavIn2015Page ) : ?>
+	<nav data-role="navbar" data-position="fixed">
+		<?php wp_nav_menu( array('theme_location' => 'phone-footer-nav', 'container' => false) ); ?>
+	</nav>
+<?php endif; ?>
 
 </div><!-- .site -->
 
 <?php wp_footer(); ?>
-
-<?php if( has_nav_menu('phone-footer-nav') && $jmwsIdMyGadget->phoneFooterNavThisDevice ) : ?>
-	<nav>
-		<?php
-			wp_nav_menu( array(
-				'theme_location' => 'phone-footer-nav',
-			) );
-		?>
-	</nav>
-<?php endif; ?>
 
 </body>
 </html>
