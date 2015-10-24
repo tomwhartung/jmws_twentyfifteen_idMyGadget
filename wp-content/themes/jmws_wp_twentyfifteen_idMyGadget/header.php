@@ -93,11 +93,6 @@ $header_html .= '</header><!-- .site-header -->';
 
 		<?php echo $header_html ?>
 		<?php get_sidebar(); ?>
-		<?php if( $jmwsIdMyGadget->phoneFooterNavIn2015Sidebar ) : ?>
-			<nav data-role="navbar" data-position="fixed">
-				<?php wp_nav_menu( array('theme_location' => 'phone-footer-nav', 'container' => false) ); ?>
-			</nav>
-		<?php endif; ?>
 	</div><!-- .sidebar -->
 
 	<div id="content" class="site-content" <?php echo $jmwsIdMyGadget->jqmDataRole['content'] ?>>
