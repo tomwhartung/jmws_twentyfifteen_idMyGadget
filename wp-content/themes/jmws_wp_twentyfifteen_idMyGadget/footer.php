@@ -33,7 +33,10 @@ global $jmwsIdMyGadget;
 		</div><!-- .debug -->
 	</footer><!-- .site-footer -->
 
-<?php if( $jmwsIdMyGadget->phoneFooterNavIn2015Page || $jmwsIdMyGadget->phoneFooterNavIn2015Sidebar ) : ?>
+<?php
+	// I tried it and the phone footer nav does not belong in the sidebar....
+	//
+	if( $jmwsIdMyGadget->phoneFooterNavIn2015Page || $jmwsIdMyGadget->phoneFooterNavIn2015Sidebar ) : ?>
 	<nav data-role="navbar" data-position="fixed">
 		<?php wp_nav_menu( array('theme_location' => 'phone-footer-nav', 'container' => false) ); ?>
 	</nav>
