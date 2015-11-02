@@ -28,8 +28,6 @@ global $jmwsIdMyGadget;
 		</div><!-- .site-info -->
 		<div class="debug">
 			<?php print $jmwsIdMyGadget->getSanityCheckString(); ?>
-			<p>$jmwsIdMyGadget->phoneFooterNavIn2015Page: <?php echo $jmwsIdMyGadget->phoneFooterNavIn2015Page ?></p>
-			<p>$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar: <?php echo $jmwsIdMyGadget->phoneFooterNavIn2015Sidebar ?></p>
 		</div><!-- .debug -->
 	</footer><!-- .site-footer -->
 
