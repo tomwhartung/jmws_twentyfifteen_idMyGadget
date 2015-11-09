@@ -12,6 +12,13 @@ The goal is to add options similar to those added to joomla.  This is a work in 
 
 For details see the [jmws_protostar_tomh_idMyGadget repo on github](https://github.com/tomwhartung/jmws_protostar_tomh_idMyGadget).
 
+## Updates to Version 1.2 of Twentyfifteen
+
+This template used version 1.2 of twentyfifteen as a starting point.
+As of 2015-11-09 twentyfifteen has beenn upgraded to version 1.3.
+For a copy of the version 1.2 code see:
+* wp-content/themes/jmws_wp_twentyfifteen_idMyGadget/save/twentyfifteen-1.2.tgz
+Saved this off before updating the theme, in case we want to migrate changes to the original back into this project some day.
 
 
 ## FAQ
