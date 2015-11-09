@@ -1,0 +1,423 @@
+diff --git a/wp-content/themes/twentyfifteen/css/editor-style.css b/wp-content/themes/twentyfifteen/css/editor-style.css
+index ab1b75a..33db931 100644
+--- a/wp-content/themes/twentyfifteen/css/editor-style.css
++++ b/wp-content/themes/twentyfifteen/css/editor-style.css
+@@ -15,7 +15,6 @@ Description: Used to style the TinyMCE editor.
+  * 6.0 - Galleries
+  * 7.0 - Audio / Video
+  * 8.0 - RTL
+- * 9.0 - Media Queries
+  */
+ 
+ 
+@@ -297,7 +296,7 @@ table td,
+ img {
+ 	border: 0;
+ 	height: auto;
+-	max-width: 660px;
++	max-width: 100%;
+ 	vertical-align: middle;
+ }
+ 
+@@ -347,7 +346,7 @@ a {
+ 	color: #707070;
+ 	font-family: "Noto Sans", sans-serif;
+ 	margin: 0 0 28px 0;
+-	max-width: 660px;
++	max-width: 100%;
+ 	padding: 0;
+ 	text-align: inherit;
+ }
+@@ -476,18 +475,3 @@ body.rtl {
+ .rtl table caption {
+ 	text-align: right;
+ }
+-
+-
+-/**
+- * 9.0 Media Queries
+- */
+-
+-@media screen and (max-width: 740px) {
+-	body, img, .wp-caption {
+-		max-width: 100%;
+-	}
+-
+-	img, .wp-caption {
+-		width: auto !important;
+-	}
+-}
+diff --git a/wp-content/themes/twentyfifteen/functions.php b/wp-content/themes/twentyfifteen/functions.php
+index 1a8e8a3..e109a2b 100644
+--- a/wp-content/themes/twentyfifteen/functions.php
++++ b/wp-content/themes/twentyfifteen/functions.php
+@@ -198,7 +198,7 @@ function twentyfifteen_fonts_url() {
+ 		$fonts_url = add_query_arg( array(
+ 			'family' => urlencode( implode( '|', $fonts ) ),
+ 			'subset' => urlencode( $subsets ),
+-		), '//fonts.googleapis.com/css' );
++		), 'https://fonts.googleapis.com/css' );
+ 	}
+ 
+ 	return $fonts_url;
+diff --git a/wp-content/themes/twentyfifteen/inc/custom-header.php b/wp-content/themes/twentyfifteen/inc/custom-header.php
+index 34994a9..10d0ef1 100644
+--- a/wp-content/themes/twentyfifteen/inc/custom-header.php
++++ b/wp-content/themes/twentyfifteen/inc/custom-header.php
+@@ -133,7 +133,14 @@ function twentyfifteen_header_style() {
+ 		if ( ! empty( $header_image ) ) :
+ 	?>
+ 		.site-header {
+-			background: url(<?php header_image(); ?>) no-repeat 50% 50%;
++
++			/*
++			 * No shorthand so the Customizer can override individual properties.
++			 * @see https://core.trac.wordpress.org/ticket/31460
++			 */
++			background-image: url(<?php header_image(); ?>);
++			background-repeat: no-repeat;
++			background-position: 50% 50%;
+ 			-webkit-background-size: cover;
+ 			-moz-background-size:    cover;
+ 			-o-background-size:      cover;
+@@ -142,7 +149,14 @@ function twentyfifteen_header_style() {
+ 
+ 		@media screen and (min-width: 59.6875em) {
+ 			body:before {
+-				background: url(<?php header_image(); ?>) no-repeat 100% 50%;
++
++				/*
++				 * No shorthand so the Customizer can override individual properties.
++				 * @see https://core.trac.wordpress.org/ticket/31460
++				 */
++				background-image: url(<?php header_image(); ?>);
++				background-repeat: no-repeat;
++				background-position: 100% 50%;
+ 				-webkit-background-size: cover;
+ 				-moz-background-size:    cover;
+ 				-o-background-size:      cover;
+diff --git a/wp-content/themes/twentyfifteen/inc/template-tags.php b/wp-content/themes/twentyfifteen/inc/template-tags.php
+index 0a617c0..1baca52 100644
+--- a/wp-content/themes/twentyfifteen/inc/template-tags.php
++++ b/wp-content/themes/twentyfifteen/inc/template-tags.php
+@@ -119,7 +119,8 @@ function twentyfifteen_entry_meta() {
+ 
+ 	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+ 		echo '<span class="comments-link">';
+-		comments_popup_link( __( 'Leave a comment', 'twentyfifteen' ), __( '1 Comment', 'twentyfifteen' ), __( '% Comments', 'twentyfifteen' ) );
++		/* translators: %s: post title */
++		comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'twentyfifteen' ), get_the_title() ) );
+ 		echo '</span>';
+ 	}
+ }
+diff --git a/wp-content/themes/twentyfifteen/js/functions.js b/wp-content/themes/twentyfifteen/js/functions.js
+index eeeecd2..9adad87 100644
+--- a/wp-content/themes/twentyfifteen/js/functions.js
++++ b/wp-content/themes/twentyfifteen/js/functions.js
+@@ -9,23 +9,39 @@
+ 	var $body, $window, $sidebar, adminbarOffset, top = false,
+ 	    bottom = false, windowWidth, windowHeight, lastWindowPos = 0,
+ 	    topOffset = 0, bodyHeight, sidebarHeight, resizeTimer,
+-		secondary, button;
+-
+-	// Add dropdown toggle that display child menu items.
+-	$( '.main-navigation .menu-item-has-children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
+-
+-	// Toggle buttons and submenu items with active children menu items.
+-	$( '.main-navigation .current-menu-ancestor > button' ).addClass( 'toggle-on' );
+-	$( '.main-navigation .current-menu-ancestor > .sub-menu' ).addClass( 'toggled-on' );
+-
+-	$( '.dropdown-toggle' ).click( function( e ) {
+-		var _this = $( this );
+-		e.preventDefault();
+-		_this.toggleClass( 'toggle-on' );
+-		_this.next( '.children, .sub-menu' ).toggleClass( 'toggled-on' );
+-		_this.attr( 'aria-expanded', _this.attr( 'aria-expanded' ) === 'false' ? 'true' : 'false' );
+-		_this.html( _this.html() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand );
+-	} );
++	    secondary, button;
++
++	function initMainNavigation( container ) {
++		// Add dropdown toggle that display child menu items.
++		container.find( '.menu-item-has-children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
++
++		// Toggle buttons and submenu items with active children menu items.
++		container.find( '.current-menu-ancestor > button' ).addClass( 'toggle-on' );
++		container.find( '.current-menu-ancestor > .sub-menu' ).addClass( 'toggled-on' );
++
++		container.find( '.dropdown-toggle' ).click( function( e ) {
++			var _this = $( this );
++			e.preventDefault();
++			_this.toggleClass( 'toggle-on' );
++			_this.next( '.children, .sub-menu' ).toggleClass( 'toggled-on' );
++			_this.attr( 'aria-expanded', _this.attr( 'aria-expanded' ) === 'false' ? 'true' : 'false' );
++			_this.html( _this.html() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand );
++		} );
++	}
++	initMainNavigation( $( '.main-navigation' ) );
++
++	// Re-initialize the main navigation when it is updated, persisting any existing submenu expanded states.
++	$( document ).on( 'customize-preview-menu-refreshed', function( e, params ) {
++		if ( 'primary' === params.wpNavMenuArgs.theme_location ) {
++			initMainNavigation( params.newContainer );
++
++			// Re-sync expanded states from oldContainer.
++			params.oldContainer.find( '.dropdown-toggle.toggle-on' ).each(function() {
++				var containerId = $( this ).parent().prop( 'id' );
++				$( params.newContainer ).find( '#' + containerId + ' > .dropdown-toggle' ).triggerHandler( 'click' );
++			});
++		}
++	});
+ 
+ 	secondary = $( '#secondary' );
+ 	button = $( '.site-branding' ).find( '.secondary-toggle' );
+diff --git a/wp-content/themes/twentyfifteen/languages/twentyfifteen.pot b/wp-content/themes/twentyfifteen/languages/twentyfifteen.pot
+index 07f491f..60a5a63 100644
+--- a/wp-content/themes/twentyfifteen/languages/twentyfifteen.pot
++++ b/wp-content/themes/twentyfifteen/languages/twentyfifteen.pot
+@@ -2,9 +2,9 @@
+ # This file is distributed under the GNU General Public License v2 or later.
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: Twenty Fifteen 1.1\n"
+-"Report-Msgid-Bugs-To: http://wordpress.org/support/theme/twentyfifteen\n"
+-"POT-Creation-Date: 2015-04-23 15:11:26+00:00\n"
++"Project-Id-Version: Twenty Fifteen 1.3\n"
++"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/twentyfifteen\n"
++"POT-Creation-Date: 2015-07-27 19:47:38+00:00\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -53,7 +53,7 @@ msgid "Comments are closed."
+ msgstr ""
+ 
+ #. translators: %s: Name of current post
+-#: content-link.php:31 content.php:33 inc/template-tags.php:237
++#: content-link.php:31 content.php:33 inc/template-tags.php:238
+ msgid "Continue reading %s"
+ msgstr ""
+ 
+@@ -87,7 +87,7 @@ msgid ""
+ "searching can help."
+ msgstr ""
+ 
+-#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.1)  #-#-#-#-#
++#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.3)  #-#-#-#-#
+ #. Author URI of the plugin/theme
+ #: footer.php:25
+ msgid "https://wordpress.org/"
+@@ -273,16 +273,9 @@ msgctxt "Used before full size attachment link."
+ msgid "Full size"
+ msgstr ""
+ 
+-#: inc/template-tags.php:122
+-msgid "Leave a comment"
+-msgstr ""
+-
+-#: inc/template-tags.php:122
+-msgid "1 Comment"
+-msgstr ""
+-
+-#: inc/template-tags.php:122
+-msgid "% Comments"
++#. translators: %s: post title
++#: inc/template-tags.php:123
++msgid "Leave a comment<span class=\"screen-reader-text\"> on %s</span>"
+ msgstr ""
+ 
+ #: search.php:18
+diff --git a/wp-content/themes/twentyfifteen/readme.txt b/wp-content/themes/twentyfifteen/readme.txt
+index aee7f17..540ead0 100644
+--- a/wp-content/themes/twentyfifteen/readme.txt
++++ b/wp-content/themes/twentyfifteen/readme.txt
+@@ -1,16 +1,16 @@
+ === Twenty Fifteen ===
+ Contributors: the WordPress team
+-Tags: black, blue, gray, pink, purple, white, yellow, dark, light, two-columns, left-sidebar, fixed-layout, responsive-layout, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+-Requires at least: 4.1
+-Tested up to: 4.1
+-Stable tag: 4.1
++Requires at least: WordPress 4.1
++Tested up to: WordPress 4.3-trunk
++Version: 1.3
+ License: GPLv2 or later
+ License URI: http://www.gnu.org/licenses/gpl-2.0.html
++Tags: black, blue, gray, pink, purple, white, yellow, dark, light, two-columns, left-sidebar, fixed-layout, responsive-layout, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+ 
+ == Description ==
+ Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer.
+ 
+-* Responsive Layout
++* Mobile-first, Responsive Layout
+ * Custom Colors
+ * Custom Header
+ * Social Links
+@@ -18,75 +18,59 @@ Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty
+ * Post Formats
+ * The GPL v2.0 or later license. :) Use it to make something cool.
+ 
++For more information about Twenty Fifteen please go to https://codex.wordpress.org/Twenty_Fifteen.
++
+ == Installation ==
+ 
+-1. In your admin panel, go to Appearance -> Themes and click the Add New button.
+-2. Click Upload and Choose File, then select the theme's ZIP file. Click Install Now.
+-3. Click Activate to use your new theme right away.
+-
+-== Frequently Asked Questions ==
+-
+-= How do I change the color scheme? =
+-
+-You can change the colors of your site easily using Twenty Fifteen.
+-
+-1. In your admin panel, go to Appearance -> Customize.
+-4. Now you will see the Customizer and a tab called 'Colors'. Click this tab.
+-5. You can now change your color scheme by selecting one of the predefined ones. Choose a color scheme you want from Base Color Scheme dropdown. You can preview the change in the Customizer.
+-6. Should you wish to create your own color scheme or modify an existing one, you can by selecting the colors for each area listed.
+-7. Once you are happy with your color changes you can click save and your changes will be reflected on your live site.
+-
+-= How do I add the Social Links to the sidebar? =
+-
+-Twenty Fifteen allows you display links to your social media profiles, like Twitter and Facebook, with icons.
+-
+-1. Create a new Custom Menu, and assign it to the Social Links Menu location.
+-2. Add links to each of your social services using the Links panel.
+-3. Icons for your social links will automatically appear if it's available.
+-
+-Available icons: (Linking to any of the following sites will automatically display its icon in your social menu).
+-
+-* Codepen
+-* Digg
+-* Dribbble
+-* Dropbox
+-* Facebook
+-* Flickr
+-* Foursquare
+-* GitHub
+-* Google+
+-* Instagram
+-* LinkedIn
+-* Email (mailto: links)
+-* Pinterest
+-* Pocket
+-* PollDaddy
+-* Reddit
+-* RSS Feed (URLs with /feed/)
+-* Spotify
+-* StumbleUpon
+-* Tumblr
+-* Twitch
+-* Twitter
+-* Vimeo
+-* WordPress
+-* YouTube
+-
+-Social networks that aren't currently supported will be indicated by a generic share icon.
+-
+-= How do I add a description for my menu link in navigation? =
+-
+-Twenty Fifteen sports a menu design that's easy to navigate -- especially when you add menu descriptions.
+-
+-1. Visit the Menus page in your admin.
+-2. Use the Screen Options tab to "Show advanced menu properties".
+-3. Select "Description" there to start editing menu descriptions.
+-4. Select the menu you want to add links and descriptions to.
+-5. When in the Menu Structure section, you can click open the link and add a description.
+-6. Once you save the menu with your link, the new description should show up.
+-
+-= Quick Specs =
+-
+-1. The main content width is 660px.
+-2. The sidebar width is 248px.
+-3. Featured Images are 825px wide by 510px high.
++1. In your admin panel, go to Appearance -> Themes and click the 'Add New' button.
++2. Type in Twenty Fifteen in the search form and press the 'Enter' key on your keyboard.
++3. Click on the 'Activate' button to use your new theme right away.
++4. Go to https://codex.wordpress.org/Twenty_Fifteen for a guide on how to customize this theme.
++5. Navigate to Appearance > Customize in your admin panel and customize to taste.
++
++== Copyright ==
++
++Twenty Fifteen WordPress Theme, Copyright 2014-2015 WordPress.org & Automattic.com
++Twenty Fifteen is distributed under the terms of the GNU GPL
++
++This program is free software: you can redistribute it and/or modify
++it under the terms of the GNU General Public License as published by
++the Free Software Foundation, either version 3 of the License, or
++(at your option) any later version.
++
++This program is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++GNU General Public License for more details.
++
++Twenty Fifteen Theme bundles the following third-party resources:
++
++HTML5 Shiv v3.7.0, Copyright 2014 Alexander Farkas
++Licenses: MIT/GPL2
++Source: https://github.com/aFarkas/html5shiv
++
++Genericons icon font, Copyright 2013-2015 Automattic.com
++License: GNU GPL, Version 2 (or later)
++Source: http://www.genericons.com
++
++== Changelog ==
++
++= 1.3 =
++* Released: August 18, 2015
++
++https://codex.wordpress.org/Twenty_Fifteen_Theme_Changelog#Version_1.3
++
++= 1.2 =
++* Released: May 6, 2015
++
++https://codex.wordpress.org/Twenty_Fifteen_Theme_Changelog#Version_1.2
++
++= 1.1 =
++* Released: April 23, 2015
++
++https://codex.wordpress.org/Twenty_Fifteen_Theme_Changelog#Version_1.1
++
++= 1.0 =
++* Released: December 18, 2014
++
++Initial release
+diff --git a/wp-content/themes/twentyfifteen/style.css b/wp-content/themes/twentyfifteen/style.css
+index 9ed56fd..1e4e8e8 100644
+--- a/wp-content/themes/twentyfifteen/style.css
++++ b/wp-content/themes/twentyfifteen/style.css
+@@ -4,7 +4,7 @@ Theme URI: https://wordpress.org/themes/twentyfifteen/
+ Author: the WordPress team
+ Author URI: https://wordpress.org/
+ Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer.
+-Version: 1.2
++Version: 1.3
+ License: GNU General Public License v2 or later
+ License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ Tags: black, blue, gray, pink, purple, white, yellow, dark, light, two-columns, left-sidebar, fixed-layout, responsive-layout, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+@@ -490,6 +490,10 @@ textarea {
+ 
+ button,
+ input {
++	-webkit-hyphens: none;
++	-moz-hyphens: none;
++	-ms-hyphens: none;
++	hyphens: none;
+ 	line-height: normal;
+ }
+ 
+@@ -880,6 +884,14 @@ a:focus {
+ 	content: "\f413";
+ }
+ 
++.social-navigation a[href*="path.com"]:before {
++	content: "\f219";
++}
++
++.social-navigation a[href*="skype.com"]:before {
++	content: "\f220";
++}
++
+ .secondary-toggle {
+ 	background-color: transparent;
+ 	border: 1px solid #eaeaea;
