@@ -27,7 +27,7 @@ global $jmwsIdMyGadget;
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentyfifteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentyfifteen' ), 'WordPress' ); ?></a>
 		</div><!-- .site-info -->
 		<div class="debug">
-			<?php print $jmwsIdMyGadget->getSanityCheckString(); ?>
+			<?php // print $jmwsIdMyGadget->getSanityCheckString(); ?>
 		</div><!-- .debug -->
 	</footer><!-- .site-footer -->
 
