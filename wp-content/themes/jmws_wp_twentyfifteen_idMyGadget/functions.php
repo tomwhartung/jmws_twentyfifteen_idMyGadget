@@ -428,6 +428,33 @@ function check_idMyGadget_install()
 	}
 }
 /**
+ * If the idMyGadget module is not available we will use this,
+ * which is the original twentyfifteen code (as of Sept. 2015).
+ */
+function getLogoTitleDescriptionHtml()
+{
+	$logoTitleDescription = '';
+	if ( is_front_page() && is_home() )
+	{
+		$logoTitleDescription = '<h1 class="site-title">Exploding!' .
+			'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
+	}
+	else
+	{
+		$logoTitleDescription = '<p class="site-title">' .
+			'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
+	}
+	$description = get_bloginfo( 'description', 'display' );
+	if ( $description || is_customize_preview() )
+	{
+		$logoTitleDescription .= '<p class="site-description">' . $description . '</p>';
+	}
+	// $logoTitleDescription .= '<button class="secondary-toggle">' . _e( 'Menu and widgets', 'twentyfifteen' ) . '</button>';
+	$logoTitleDescription .= '<button class="secondary-toggle">Menu and widgets</button>';
+
+	return $logoTitleDescription;
+}
+/**
  * Initialize:
  * 1) Determine whether the phone nav should be part of the page or the sidebar
  * 2) ???
@@ -437,44 +464,45 @@ function jmws_wp_twentyfifteen_idMyGadget_wp()
 {
 	global $idmg_nav_in_page_or_sidebar_index;
 	global $idmg_nav_in_page_or_sidebar_string;
-
 	global $jmwsIdMyGadget;
-	$jmwsIdMyGadget->phoneHeaderNavIn2015Page = FALSE;
-	$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar = FALSE;
-	$jmwsIdMyGadget->phoneFooterNavIn2015Page = FALSE;
-	$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar = FALSE;
 
-	if( $jmwsIdMyGadget->phoneHeaderNavThisDevice || $jmwsIdMyGadget->phoneFooterNavThisDevice )
+	if( isset($jmwsIdMyGadget) )
 	{
-		if ( $jmwsIdMyGadget->isPhone() )
+		$jmwsIdMyGadget->phoneHeaderNavIn2015Page = FALSE;
+		$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar = FALSE;
+		$jmwsIdMyGadget->phoneFooterNavIn2015Page = FALSE;
+		$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar = FALSE;
+		if( $jmwsIdMyGadget->phoneHeaderNavThisDevice || $jmwsIdMyGadget->phoneFooterNavThisDevice )
 		{
-			$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_phones' );
-		}
-		else if ( $jmwsIdMyGadget->isTablet() )
-		{
-			$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_tablets' );
-		}
-		else
-		{
-			$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_desktops' );
-		}
-		$idmg_nav_in_page_or_sidebar_string =
-			JmwsIdMyGadgetWordpress::$pageOrSidebar2015Options[$idmg_nav_in_page_or_sidebar_index];
-		if( $jmwsIdMyGadget->phoneHeaderNavThisDevice && has_nav_menu('phone-header-nav') )
-		{
-			$jmwsIdMyGadget->phoneHeaderNavIn2015Page =
-				$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
-			$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar =
-				$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
-		}
-		if( $jmwsIdMyGadget->phoneFooterNavThisDevice && has_nav_menu('phone-footer-nav') )
-		{
-			$jmwsIdMyGadget->phoneFooterNavIn2015Page =
-				$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
-			$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar =
-				$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
+			if ( $jmwsIdMyGadget->isPhone() )
+			{
+				$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_phones' );
+			}
+			else if ( $jmwsIdMyGadget->isTablet() )
+			{
+				$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_tablets' );
+			}
+			else
+			{
+				$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_desktops' );
+			}
+			$idmg_nav_in_page_or_sidebar_string =
+				JmwsIdMyGadgetWordpress::$pageOrSidebar2015Options[$idmg_nav_in_page_or_sidebar_index];
+			if( $jmwsIdMyGadget->phoneHeaderNavThisDevice && has_nav_menu('phone-header-nav') )
+			{
+				$jmwsIdMyGadget->phoneHeaderNavIn2015Page =
+					$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
+				$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar =
+					$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
+			}
+			if( $jmwsIdMyGadget->phoneFooterNavThisDevice && has_nav_menu('phone-footer-nav') )
+			{
+				$jmwsIdMyGadget->phoneFooterNavIn2015Page =
+					$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
+				$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar =
+					$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
+			}
 		}
 	}
-
 }
 add_action( 'wp', 'jmws_wp_twentyfifteen_idMyGadget_wp' );
