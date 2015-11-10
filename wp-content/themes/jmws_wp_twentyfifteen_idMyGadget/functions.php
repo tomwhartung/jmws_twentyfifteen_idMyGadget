@@ -455,6 +455,21 @@ function getLogoTitleDescriptionHtml()
 	return $logoTitleDescription;
 }
 /**
+ * Use the $logoTitleDescription to generate the html for the header
+ */
+function getHeaderHtml( $logoTitleDescription )
+{
+	$headerHtml  = '';
+	$headerHtml .= '<header id="masthead" class="site-header" role="banner" ';
+	$headerHtml .= $jmwsIdMyGadget->jqmDataRole['header'] . ' ';
+	$headerHtml .= $jmwsIdMyGadget->jqmDataThemeAttribute . '>';
+	$headerHtml .= '<div class="site-branding">';
+	$headerHtml .= $logoTitleDescription;
+	$headerHtml .= '</div><!-- .site-branding -->';
+	$headerHtml .= '</header><!-- .site-header -->';
+	return $headerHtml ;
+}
+/**
  * Initialize:
  * 1) Determine whether the phone nav should be part of the page or the sidebar
  * 2) ???
