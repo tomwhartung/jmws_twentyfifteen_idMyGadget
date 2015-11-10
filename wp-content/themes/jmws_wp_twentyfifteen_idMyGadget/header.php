@@ -44,14 +44,7 @@ else
 {
 	$logoTitleDescription = getLogoTitleDescriptionHtml();
 }
-$header_html = '';
-$header_html .= '<header id="masthead" class="site-header" role="banner" ';
-$header_html .= $jmwsIdMyGadget->jqmDataRole['header'] . ' ';
-$header_html .= $jmwsIdMyGadget->jqmDataThemeAttribute . '>';
-$header_html .= '<div class="site-branding">';
-$header_html .= $logoTitleDescription;
-$header_html .= '</div><!-- .site-branding -->';
-$header_html .= '</header><!-- .site-header -->';
+$header_html = getHeaderHtml( $logoTitleDescription );
 ?>
 
 <body <?php body_class(); ?>>
