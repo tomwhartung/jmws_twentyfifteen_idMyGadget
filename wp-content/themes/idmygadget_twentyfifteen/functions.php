@@ -365,7 +365,8 @@ require get_template_directory() . '/inc/customizer.php';
 function idmygadget_twentyfifteen_enqueue_styles()
 {
 	$css_file = get_template_directory_uri() . "/idMyGadget/idMyGadget.css";
-	wp_enqueue_style( 'idMyGadget-css', $css_file );
+	wp_register_style( 'idMyGadget-css', $css_file );
+	wp_enqueue_style( 'idMyGadget-css' );
 }
 
 add_action( 'wp_enqueue_scripts', 'idmygadget_twentyfifteen_enqueue_styles' );
