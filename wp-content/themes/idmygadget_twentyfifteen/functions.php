@@ -362,13 +362,13 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Add in the scripts and stylesheets we need for integration with IdMyGadget
  */
-function enqueue_idmygadget_css()
+function idmygadget_twentyfifteen_enqueue_styles()
 {
 	$css_file = get_template_directory_uri() . "/idMyGadget/idMyGadget.css";
 	wp_enqueue_style( 'idMyGadget-css', $css_file );
 }
 
-add_action( 'wp_enqueue_scripts', 'enqueue_idmygadget_css' );
+add_action( 'wp_enqueue_scripts', 'idmygadget_twentyfifteen_enqueue_styles' );
 
 /**
  * Checks for a valid idMyGadget object; if one is not present:
@@ -376,7 +376,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_idmygadget_css' );
  *   Create a "no detection" object to keep us from whitescreening, and
  *   Set an appropriate error message in the object
  */
-function check_idMyGadget_install()
+function idmygadget_twentyfifteen_check_idMyGadget_install()
 {
 	require_once 'idMyGadget/JmwsIdMyGadgetCheckPlugin.php';
 	$jmwsIdMyGadgetCheckPlugin = new JmwsIdMyGadgetCheckPlugin();
@@ -443,7 +443,7 @@ function getLogoTitleDescriptionHtml()
  * 2) ???
  * 3) Profit!
  */
-function jmws_wp_twentyfifteen_idMyGadget_wp()
+function idmygadget_twentyfifteen_wp()
 {
 	global $idmg_nav_in_page_or_sidebar_index;
 	global $idmg_nav_in_page_or_sidebar_string;
@@ -488,4 +488,4 @@ function jmws_wp_twentyfifteen_idMyGadget_wp()
 		}
 	}
 }
-add_action( 'wp', 'jmws_wp_twentyfifteen_idMyGadget_wp' );
+add_action( 'wp', 'idmygadget_twentyfifteen_wp' );
