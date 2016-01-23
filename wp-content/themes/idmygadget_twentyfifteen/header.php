@@ -23,7 +23,7 @@
 </head>
 <?php
 //
-// check_idMyGadget_install:
+// check idMyGadget install:
 //   If the device detection object has NOT been created,
 //     Create an object that can keep the app from whitescreening with a null pointer etc. and
 //     Display an appropriate error message (markup for that is at the end of this file)
@@ -31,7 +31,7 @@
 //   Call its fcn to get the html we need for the header
 //
 global $jmwsIdMyGadget;
-check_idMyGadget_install();
+idmygadget_twentyfifteen_check_idMyGadget_install();
 $site_name = get_bloginfo('name' );
 $header_html = getHeaderHtml( $logoTitleDescription );
 ?>
