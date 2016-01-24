@@ -366,54 +366,15 @@ require get_template_directory() . '/inc/customizer.php';
  *   Create a "no detection" object to keep us from whitescreening, and
  *   Set an appropriate error message in the object
  */
-require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteen.php';
 require_once 'idMyGadget/JmwsIdMyGadgetCheckPlugin.php';
+require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteen.php';
+require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteenHelper.php';
 function idmygadget_twentyfifteen_wp()
 {
-	global $idmg_nav_in_page_or_sidebar_index;
-	global $idmg_nav_in_page_or_sidebar_string;
-	global $jmwsIdMyGadget;
-
-	idmygadget_twentyfifteen_check_idMyGadget_install();
-	
-	if( isset($jmwsIdMyGadget) )
-	{
-		$jmwsIdMyGadget->phoneHeaderNavIn2015Page = FALSE;
-		$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar = FALSE;
-		$jmwsIdMyGadget->phoneFooterNavIn2015Page = FALSE;
-		$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar = FALSE;
-		if( $jmwsIdMyGadget->phoneHeaderNavThisDevice || $jmwsIdMyGadget->phoneFooterNavThisDevice )
-		{
-			if ( $jmwsIdMyGadget->isPhone() )
-			{
-				$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_phones' );
-			}
-			else if ( $jmwsIdMyGadget->isTablet() )
-			{
-				$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_tablets' );
-			}
-			else
-			{
-				$idmg_nav_in_page_or_sidebar_index = get_theme_mod( 'idmg_nav_in_page_or_sidebar_desktops' );
-			}
-			$idmg_nav_in_page_or_sidebar_string =
-				JmwsIdMyGadgetWordpress::$pageOrSidebar2015Options[$idmg_nav_in_page_or_sidebar_index];
-			if( $jmwsIdMyGadget->phoneHeaderNavThisDevice && has_nav_menu('phone-header-nav') )
-			{
-				$jmwsIdMyGadget->phoneHeaderNavIn2015Page =
-					$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
-				$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar =
-					$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
-			}
-			if( $jmwsIdMyGadget->phoneFooterNavThisDevice && has_nav_menu('phone-footer-nav') )
-			{
-				$jmwsIdMyGadget->phoneFooterNavIn2015Page =
-					$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
-				$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar =
-					$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
-			}
-		}
-	}
+	$jmwsIdMyGadgetCheckPlugin = new JmwsIdMyGadgetCheckPlugin();
+	$jmwsIdMyGadgetCheckPlugin->checkPlugin();
+	$jmwsIdMyGadgetTwentyFifteenHelper = new JmwsIdMyGadgetTwentyFifteenHelper();
+	$jmwsIdMyGadgetTwentyFifteenHelper->setPhoneHeaderFooterNavVariables();
 }
 add_action( 'wp', 'idmygadget_twentyfifteen_wp' );
 /**
@@ -426,16 +387,3 @@ function idmygadget_twentyfifteen_enqueue_styles()
 	wp_enqueue_style( 'idMyGadget-css' );
 }
 add_action( 'wp_enqueue_scripts', 'idmygadget_twentyfifteen_enqueue_styles' );
-
-/**
- * Checks for a valid idMyGadget object; if one is not present:
- *   Diagnose the problem,
- *   Create a "no detection" object to keep us from whitescreening, and
- *   Set an appropriate error message in the object
- */
-function idmygadget_twentyfifteen_check_idMyGadget_install()
-{
-	$jmwsIdMyGadgetCheckPlugin = new JmwsIdMyGadgetCheckPlugin();
-	$jmwsIdMyGadgetCheckPlugin->checkPlugin();
-}
-
