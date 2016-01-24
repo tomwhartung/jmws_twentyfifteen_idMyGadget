@@ -32,7 +32,7 @@
 //
 global $jmwsIdMyGadget;
 $site_name = get_bloginfo('name' );
-$header_html = JmwsIdMyGadgetTwentyFifteen::getHeaderHtml();
+$header_html = JmwsIdMyGadgetTwentyFifteenHtml::getHeaderHtml();
 ?>
 
 <body <?php body_class(); ?>>

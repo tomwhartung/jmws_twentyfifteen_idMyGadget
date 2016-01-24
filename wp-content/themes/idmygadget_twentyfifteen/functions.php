@@ -367,7 +367,7 @@ require get_template_directory() . '/inc/customizer.php';
  *   Set an appropriate error message in the object
  */
 require_once 'idMyGadget/JmwsIdMyGadgetCheckPlugin.php';
-require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteen.php';
+require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteenHtml.php';
 require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteenHelper.php';
 function idmygadget_twentyfifteen_wp()
 {
