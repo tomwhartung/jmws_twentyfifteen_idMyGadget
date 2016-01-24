@@ -34,7 +34,7 @@ global $jmwsIdMyGadget;
 require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteen.php';
 idmygadget_twentyfifteen_check_idMyGadget_install();
 $site_name = get_bloginfo('name' );
-$header_html = JmwsIdMyGadgetTwentyFifteen::getHeaderHtml( $logoTitleDescription );
+$header_html = JmwsIdMyGadgetTwentyFifteen::getHeaderHtml();
 ?>
 
 <body <?php body_class(); ?>>
