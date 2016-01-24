@@ -31,9 +31,10 @@
 //   Call its fcn to get the html we need for the header
 //
 global $jmwsIdMyGadget;
+require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteen.php';
 idmygadget_twentyfifteen_check_idMyGadget_install();
 $site_name = get_bloginfo('name' );
-$header_html = getHeaderHtml( $logoTitleDescription );
+$header_html = JmwsIdMyGadgetTwentyFifteen::getHeaderHtml( $logoTitleDescription );
 ?>
 
 <body <?php body_class(); ?>>
