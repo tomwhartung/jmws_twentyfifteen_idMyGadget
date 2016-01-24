@@ -1,9 +1,22 @@
 <?php
 /**
+ * Functions added to the default WordPress theme twentyfifteen
+ * This code has been added specifically to support device detction
+ *
+ * @author Tom W. Hartung, using the default WordPress theme twentyfifteen as a starting point
+ * @package Jmws
+ * @subpackage idmygadget_twentyfifteen
+ * @since idmygadget_twentyfifteen 1.0
  */
 
 class JmwsIdMyGadgetTwentyFifteen
 {
+	/**
+	 * Note that you do not need to instantiate this class unless you need to call a non-static method.
+	 */
+	public function __construct()
+	{
+	}
 	/**
 	 * Use the $logoTitleDescription to generate the html for the header
 	 */
