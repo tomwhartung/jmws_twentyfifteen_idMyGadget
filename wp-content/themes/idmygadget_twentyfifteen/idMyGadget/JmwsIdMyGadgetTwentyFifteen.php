@@ -1,7 +1,7 @@
 <?php
 /**
- * Functions added to the default WordPress theme twentyfifteen
- * This code has been added specifically to support device detction
+ * Functions added to the default WordPress theme twentyfifteen.
+ * This code has been added specifically to support device detction.
  *
  * @author Tom W. Hartung, using the default WordPress theme twentyfifteen as a starting point
  * @package Jmws
@@ -31,7 +31,7 @@ class JmwsIdMyGadgetTwentyFifteen
 		}
 		else
 		{
-			$logoTitleDescription = getLogoTitleDescriptionHtml();
+			$logoTitleDescription = self::getLogoTitleDescriptionHtml();
 		}
 	
 		$headerHtml  = '';
