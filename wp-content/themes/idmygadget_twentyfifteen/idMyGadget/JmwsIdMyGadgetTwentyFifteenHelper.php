@@ -12,6 +12,23 @@
 class JmwsIdMyGadgetTwentyFifteenHelper
 {
 	/**
+	 * Boolean indicating whether the phone header nav should be in the page on the current device
+	 */
+	public $phoneHeaderNavIn2015Page = FALSE;
+	/**
+	 * Boolean indicating whether the phone header nav should be in the sidebar on the current device
+	 */
+	public $phoneHeaderNavIn2015Sidebar = FALSE;
+	/**
+	 * Boolean indicating whether the phone footer nav should be in the page on the current device
+	 */
+	public $phoneFooterNavIn2015Page = FALSE;
+	/**
+	 * Boolean indicating whether the phone footer nav should be in the sidebar on the current device
+	 */
+	public $phoneFooterNavIn2015Sidebar = FALSE;
+
+	/**
 	 * Note that you do not need to instantiate this class unless you need to call a non-static method.
 	 */
 	public function __construct()
@@ -28,10 +45,10 @@ class JmwsIdMyGadgetTwentyFifteenHelper
 	
 		if( isset($jmwsIdMyGadget) )
 		{
-			$jmwsIdMyGadget->phoneHeaderNavIn2015Page = FALSE;
-			$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar = FALSE;
-			$jmwsIdMyGadget->phoneFooterNavIn2015Page = FALSE;
-			$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar = FALSE;
+			$this->phoneHeaderNavIn2015Page = FALSE;
+			$this->phoneHeaderNavIn2015Sidebar = FALSE;
+			$this->phoneFooterNavIn2015Page = FALSE;
+			$this->phoneFooterNavIn2015Sidebar = FALSE;
 			if( $jmwsIdMyGadget->phoneHeaderNavThisDevice || $jmwsIdMyGadget->phoneFooterNavThisDevice )
 			{
 				if ( $jmwsIdMyGadget->isPhone() )
@@ -50,16 +67,16 @@ class JmwsIdMyGadgetTwentyFifteenHelper
 					JmwsIdMyGadgetWordpress::$pageOrSidebar2015Options[$idmg_nav_in_page_or_sidebar_index];
 				if( $jmwsIdMyGadget->phoneHeaderNavThisDevice && has_nav_menu('phone-header-nav') )
 				{
-					$jmwsIdMyGadget->phoneHeaderNavIn2015Page =
+					$this->phoneHeaderNavIn2015Page =
 						$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
-					$jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar =
+					$this->phoneHeaderNavIn2015Sidebar =
 						$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
 				}
 				if( $jmwsIdMyGadget->phoneFooterNavThisDevice && has_nav_menu('phone-footer-nav') )
 				{
-					$jmwsIdMyGadget->phoneFooterNavIn2015Page =
+					$this->phoneFooterNavIn2015Page =
 						$idmg_nav_in_page_or_sidebar_string == 'Page' ? TRUE : FALSE;
-					$jmwsIdMyGadget->phoneFooterNavIn2015Sidebar =
+					$this->phoneFooterNavIn2015Sidebar =
 						$idmg_nav_in_page_or_sidebar_string == 'Sidebar' ? TRUE : FALSE;
 				}
 			}
