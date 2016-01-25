@@ -31,13 +31,14 @@
 //   Call its fcn to get the html we need for the header
 //
 global $jmwsIdMyGadget;
+global $jmwsIdMyGadgetTwentyFifteenHelper;
 $site_name = get_bloginfo('name' );
 $header_html = JmwsIdMyGadgetTwentyFifteenHtml::getHeaderHtml();
 ?>
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site" <?php echo $jmwsIdMyGadget->jqmDataRole['page'] ?>>
-	<?php if( $jmwsIdMyGadget->phoneHeaderNavIn2015Page ) : ?>
+	<?php if( $jmwsIdMyGadgetTwentyFifteenHelper->phoneHeaderNavIn2015Page ) : ?>
 		<nav data-role="navbar">
 			<?php wp_nav_menu( array('theme_location' => 'phone-header-nav', 'container' => false) ); ?>
 		</nav>
@@ -47,7 +48,7 @@ $header_html = JmwsIdMyGadgetTwentyFifteenHtml::getHeaderHtml();
 
 	<div id="sidebar" class="sidebar">
 
-		<?php if( $jmwsIdMyGadget->phoneHeaderNavIn2015Sidebar ) : ?>
+		<?php if( $jmwsIdMyGadgetTwentyFifteenHelper->phoneHeaderNavIn2015Sidebar ) : ?>
 			<nav data-role="navbar">
 				<?php wp_nav_menu( array('theme_location' => 'phone-header-nav', 'container' => false) ); ?>
 			</nav>
