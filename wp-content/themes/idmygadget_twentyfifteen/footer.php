@@ -9,6 +9,7 @@
  * @since Twenty Fifteen 1.0
  */
 global $jmwsIdMyGadget;
+global $jmwsIdMyGadgetTwentyFifteenHelper;
 ?>
 
 	</div><!-- .site-content -->
@@ -32,9 +33,11 @@ global $jmwsIdMyGadget;
 	</footer><!-- .site-footer -->
 
 <?php
-	// I tried it and the phone footer nav does not belong in the sidebar....
+	// I tried it and the phone footer nav definitely does not belong in the sidebar,
+	//   so we always render it here.
 	//
-	if( $jmwsIdMyGadget->phoneFooterNavIn2015Page || $jmwsIdMyGadget->phoneFooterNavIn2015Sidebar ) : ?>
+	if( $jmwsIdMyGadgetTwentyFifteenHelper->phoneFooterNavIn2015Page ||
+	    $jmwsIdMyGadgetTwentyFifteenHelper->phoneFooterNavIn2015Sidebar ) : ?>
 	<nav data-role="navbar" data-position="fixed">
 		<?php wp_nav_menu( array('theme_location' => 'phone-footer-nav', 'container' => false) ); ?>
 	</nav>

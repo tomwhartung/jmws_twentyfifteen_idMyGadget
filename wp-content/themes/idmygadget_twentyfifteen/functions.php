@@ -371,6 +371,7 @@ require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteenHtml.php';
 require_once 'idMyGadget/JmwsIdMyGadgetTwentyFifteenHelper.php';
 function idmygadget_twentyfifteen_wp()
 {
+	global $jmwsIdMyGadgetTwentyFifteenHelper;
 	$jmwsIdMyGadgetCheckPlugin = new JmwsIdMyGadgetCheckPlugin();
 	$jmwsIdMyGadgetCheckPlugin->checkPlugin();
 	$jmwsIdMyGadgetTwentyFifteenHelper = new JmwsIdMyGadgetTwentyFifteenHelper();

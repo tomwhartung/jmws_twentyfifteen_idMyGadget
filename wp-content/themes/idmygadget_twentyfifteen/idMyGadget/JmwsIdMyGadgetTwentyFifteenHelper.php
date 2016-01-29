@@ -29,13 +29,13 @@ class JmwsIdMyGadgetTwentyFifteenHelper
 	public $phoneFooterNavIn2015Sidebar = FALSE;
 
 	/**
-	 * Note that you do not need to instantiate this class unless you need to call a non-static method.
+	 * Constructor.
 	 */
 	public function __construct()
 	{
 	}
 	/**
-	 * Use the $logoTitleDescription to generate the html for the header
+	 * Set variables so the header knows what type of navigation to use, if any
 	 */
 	public function setPhoneHeaderFooterNavVariables()
 	{
