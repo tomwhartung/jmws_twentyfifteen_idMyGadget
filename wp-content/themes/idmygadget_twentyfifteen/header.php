@@ -10,17 +10,6 @@
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<!--[if lt IE 9]>
-	<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
-	<![endif]-->
-	<title>twentyfifteen:</title>
-	<?php wp_head(); ?>
-</head>
 <?php
 //
 // check idMyGadget install:
@@ -32,10 +21,23 @@
 //
 global $jmwsIdMyGadget;
 global $jmwsIdMyGadgetTwentyFifteenHelper;
+$site_title_or_name = $jmwsIdMyGadget->getSiteTitleOrName();
 ?>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<!--[if lt IE 9]>
+	<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
+	<![endif]-->
+	<title><?php echo $site_title_or_name; ?></title>
+	<?php wp_head(); ?>
+</head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed site" <?php echo $jmwsIdMyGadget->jqmDataRole['page'] ?>>
+<div id="page" class="hfeed site" <?php echo $jmwsIdMyGadget->jqmDataRole['page'] ?>
+	  data-title="<?php echo $site_title_or_name; ?>">
 	<?php if( $jmwsIdMyGadgetTwentyFifteenHelper->phoneHeaderNavIn2015Page ) : ?>
 		<nav data-role="navbar">
 			<?php wp_nav_menu( array('theme_location' => 'phone-header-nav', 'container' => false) ); ?>
