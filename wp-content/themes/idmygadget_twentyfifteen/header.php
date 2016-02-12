@@ -32,8 +32,6 @@
 //
 global $jmwsIdMyGadget;
 global $jmwsIdMyGadgetTwentyFifteenHelper;
-$site_name = get_bloginfo('name' );
-$header_html = JmwsIdMyGadgetTwentyFifteenHtml::getHeaderHtml();
 ?>
 
 <body <?php body_class(); ?>>
@@ -54,7 +52,7 @@ $header_html = JmwsIdMyGadgetTwentyFifteenHtml::getHeaderHtml();
 			</nav>
 		<?php endif; ?>
 
-		<?php echo $header_html ?>
+		<?php echo JmwsIdMyGadgetTwentyFifteenHtml::getHeaderHtml(); ?>
 		<?php get_sidebar(); ?>
 	</div><!-- .sidebar -->
 
