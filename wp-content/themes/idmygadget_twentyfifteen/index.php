@@ -59,13 +59,6 @@ get_header(); ?>
 	</div><!-- .content-area -->
 <div id="debug">
 	<p><?php print ''; ?></p>
-	<p><?php print ''; ?></p>
-	<p>$jmwsIdMyGadget->getGadgetDetectorString(): <?php print $jmwsIdMyGadget->getGadgetDetectorString(); ?></p>
-	<p><?php print ''; ?></p>
-	<p>$jmwsIdMyGadget->isEnabled(): <?php print $jmwsIdMyGadget->isEnabled(); ?></p>
-	<p><?php print ''; ?></p>
-	<p><?php print ''; ?></p>
-	<p><?php print ''; ?></p>
 </div>
 
 <?php get_footer(); ?>
