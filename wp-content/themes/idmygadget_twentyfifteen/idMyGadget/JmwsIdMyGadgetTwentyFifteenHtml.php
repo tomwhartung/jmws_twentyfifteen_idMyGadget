@@ -53,13 +53,13 @@ class JmwsIdMyGadgetTwentyFifteenHtml
 		$logoTitleDescription = '';
 		if ( is_front_page() && is_home() )
 		{
-			$logoTitleDescription = '<h1 class="site-title">Exploding!' .
-					'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></h1>';
+			$logoTitleDescription = '<h1 class="site-title">' .
+					'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . get_bloginfo('name' ) . '</a></h1>';
 		}
 		else
 		{
 			$logoTitleDescription = '<p class="site-title">' .
-					'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . $site_name . '</a></p>';
+					'<a href="' . esc_url( home_url('/') ) . '" rel="home">' . get_bloginfo('name' ) . '</a></p>';
 		}
 		$description = get_bloginfo( 'description', 'display' );
 		if ( $description || is_customize_preview() )
