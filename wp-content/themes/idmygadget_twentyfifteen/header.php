@@ -26,6 +26,7 @@ $site_title_or_name = $jmwsIdMyGadget->getSiteTitleOrName();
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<link rel="alternate" href="<?php echo esc_url( home_url('/') ); ?>" hreflang="en-us" />
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<!--[if lt IE 9]>
