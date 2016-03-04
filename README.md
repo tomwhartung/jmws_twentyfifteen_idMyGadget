@@ -2,6 +2,21 @@
 
 Adding the device detection provided by IdMyGadget to the default Wordpress theme twentyfifteen.
 
+## This Repo Is No Longer Active
+
+**Note that this repository is no longer being updated.**
+
+### Details
+
+It turns out that using device detection to add adaptive functionality to this already-responsive theme did not work out very well.
+
+This is not so much because of the adaptive functionality as it is because of my chosen "use-case," which is to use device detection to serve a different header image
+and menu styles based on the type of device the user agent is running on.
+
+--------------------------------------
+--------------------------------------
+--------------------------------------
+
 ## Introduction
 
 This is the WordPress default theme Twentyfifteen with IdMyGadget device detection added in.
