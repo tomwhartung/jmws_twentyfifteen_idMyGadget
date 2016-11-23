@@ -37,6 +37,7 @@ $site_title_or_name = $jmwsIdMyGadget->getSiteTitleOrName();
 </head>
 
 <body <?php body_class(); ?>>
+<?php include_once("google_analytics.php") ?>
 <div id="page" class="hfeed site" <?php echo $jmwsIdMyGadget->jqmDataRole['page'] ?>
 	  data-title="<?php echo $site_title_or_name; ?>">
 	<?php if( $jmwsIdMyGadgetTwentyFifteenHelper->phoneHeaderNavIn2015Page ) : ?>
